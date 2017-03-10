@@ -2,7 +2,8 @@
 
 **Description**
 An application that allows users to geotag events and classified ads overlaid onto a map of the surrounding location. By default the application uses the current location however the user can do this by dropping a tag onto a particular location on the map.This would allow them to see the different events and advertisements around the tag.The users can create events in our application, we will be storing this information onto our database. We would use the past events information, to create a heat map which shows the most popular locations for events. Additionally, we will be creating a feature to recommend events to the user and we will allow users to pay for the cover fees or products directly through the application.The users will be able to locate the events that their friends are attending. They can also filter events based on time periods, group sizes and specific event categories. 
-Usefulness
+
+**Usefulness**
 The following applications have features which are similar to ours:
 * Meet up
 * Craigslist
