@@ -1,5 +1,5 @@
 from django import forms
-from .models import Users, Reviews, Locations, Events, Is_Attending, Classifieds, Is_Friend
+from geotag.models import Users, Reviews, Locations, Events, Is_Attending, Classifieds, Is_Friend
 
 
 class UsersForm(forms.ModelForm):
@@ -42,5 +42,3 @@ class Is_FriendForm(forms.ModelForm):
     class Meta:
         model = Is_Friend
         fields = ['user1_id', 'user2_id']
-
-

@@ -1,6 +1,6 @@
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
-from .models import Users, Reviews, Locations, Events, Is_Attending, Classifieds, Is_Friend
-from .forms import UsersForm, ReviewsForm, LocationsForm, EventsForm, Is_AttendingForm, ClassifiedsForm, Is_FriendForm
+from geotag.models import Users, Reviews, Locations, Events, Is_Attending, Classifieds, Is_Friend
+from forms import UsersForm, ReviewsForm, LocationsForm, EventsForm, Is_AttendingForm, ClassifiedsForm, Is_FriendForm
 
 
 class UsersListView(ListView):
@@ -127,4 +127,3 @@ class Is_FriendDetailView(DetailView):
 class Is_FriendUpdateView(UpdateView):
     model = Is_Friend
     form_class = Is_FriendForm
-
