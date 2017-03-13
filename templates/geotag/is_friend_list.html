@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'geotag_is_friend_list' %}">Is_Friend Listing</a></p>
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>user1_id</td>
+    <td>user2_id</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.user1_id }}</td>
+    <td>{{ object.user2_id }}</td>
+</tr>
+{% endfor %}
+</table><a class="btn btn-primary" href="{% url 'geotag_is_friend_create' %}">Create new Is_Friend</a>
+{% endblock %}

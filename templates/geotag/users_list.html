@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'geotag_users_list' %}">Users Listing</a></p>
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>fb_id</td>
+    <td>name</td>
+    <td>description</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.fb_id }}</td>
+    <td>{{ object.name }}</td>
+    <td>{{ object.description }}</td>
+</tr>
+{% endfor %}
+</table><a class="btn btn-primary" href="{% url 'geotag_users_create' %}">Create new Users</a>
+{% endblock %}
