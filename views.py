@@ -127,4 +127,3 @@ class Is_FriendDetailView(DetailView):
 class Is_FriendUpdateView(UpdateView):
     model = Is_Friend
     form_class = Is_FriendForm
-
