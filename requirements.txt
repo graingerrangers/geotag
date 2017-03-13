@@ -6,3 +6,4 @@ six==1.10.0
 MySQL-python==1.2.5
 python-dotenv==0.6.3
 django-crispy-forms==1.6.1
+djangorestframework==3.6.2
