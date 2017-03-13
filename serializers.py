@@ -1,4 +1,4 @@
-import models
+from geotag.models import *
 
 from rest_framework import serializers
 
@@ -6,89 +6,87 @@ from rest_framework import serializers
 class UsersSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.Users
+        model = Users
         fields = (
-            'pk', 
-            'fb_id', 
-            'name', 
-            'description', 
+            'pk',
+            'fb_id',
+            'name',
+            'description',
         )
 
 
 class ReviewsSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.Reviews
+        model = Reviews
         fields = (
-            'pk', 
-            'review_id', 
-            'content', 
+            'pk',
+            'review_id',
+            'content',
         )
 
 
 class LocationsSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.Locations
+        model = Locations
         fields = (
-            'pk', 
-            'location_id', 
-            'popularity', 
-            'coord_x', 
-            'coord_y', 
+            'pk',
+            'location_id',
+            'popularity',
+            'coord_x',
+            'coord_y',
         )
 
 
 class EventsSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.Events
+        model = Events
         fields = (
-            'pk', 
-            'event_id', 
-            'description', 
-            'name', 
-            'start_time', 
-            'end_time', 
-            'max_group_size', 
-            'fee', 
-            'public', 
+            'pk',
+            'event_id',
+            'description',
+            'name',
+            'start_time',
+            'end_time',
+            'max_group_size',
+            'fee',
+            'public',
         )
 
 
 class Is_AttendingSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.Is_Attending
+        model = Is_Attending
         fields = (
-            'pk', 
-            'user_id', 
-            'event_id', 
+            'pk',
+            'user_id',
+            'event_id',
         )
 
 
 class ClassifiedsSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.Classifieds
+        model = Classifieds
         fields = (
-            'pk', 
-            'classified_id', 
-            'description', 
-            'name', 
-            'category', 
-            'price', 
+            'pk',
+            'classified_id',
+            'description',
+            'name',
+            'category',
+            'price',
         )
 
 
 class Is_FriendSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.Is_Friend
+        model = Is_Friend
         fields = (
-            'pk', 
-            'user1_id', 
-            'user2_id', 
+            'pk',
+            'user1_id',
+            'user2_id',
         )
-
-
