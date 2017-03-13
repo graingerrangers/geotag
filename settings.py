@@ -9,6 +9,11 @@ https://docs.djangoproject.com/en/1.10/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 import os
 
