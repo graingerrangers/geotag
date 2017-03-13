@@ -82,7 +82,7 @@ DATABASES = {
 		'USER': os.environ['admin'],
 		'PASSWORD': os.environ['graingerrangers2017'],
 		'HOST': os.environ['http://aac6g0qms3rhoc.cn42r3n8fae4.us-west-2.rds.amazonaws.com'],
-		'PORT': os.environ['3306']
+		'PORT': os.environ['3306'],
 		'OPTIONS':{
 			'autocommit': True
 		}
