@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'geotagapp.wsgi.application'
 DATABASES = {
     'default': {
 		'ENGINE': 'django.db.backends.mysql',
-		 'NAME': os.environ['ebdb'],
-		'USER': os.environ['admin'],
-		'PASSWORD': os.environ['graingerrangers2017'],
-		'HOST': os.environ['http://aac6g0qms3rhoc.cn42r3n8fae4.us-west-2.rds.amazonaws.com'],
-		'PORT': os.environ['3306'],
+		'NAME': os.environ['RDS_DB_NAME'],
+		'USER': os.environ['RDS_USERNAME'],
+		'PASSWORD': os.environ['RDS_PASSWORD'],
+		'HOST': os.environ['RDS_HOSTNAME'],
+		'PORT': os.environ['RDS_PORT'],
 		'OPTIONS':{
 			'autocommit': True
 		}
