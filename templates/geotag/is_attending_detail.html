@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'geotag_is_attending_list' %}">Is_Attending Listing</a></p>
+<table class="table">
+<tr><td>user_id</td><td>{{ object.user_id }}</td></tr>
+<tr><td>event_id</td><td>{{ object.event_id }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit Is_Attending</a>
+
+{% endblock %}

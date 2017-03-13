@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'geotag_classifieds_list' %}">Classifieds Listing</a></p>
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>classified_id</td>
+    <td>description</td>
+    <td>name</td>
+    <td>category</td>
+    <td>price</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.classified_id }}</td>
+    <td>{{ object.description }}</td>
+    <td>{{ object.name }}</td>
+    <td>{{ object.category }}</td>
+    <td>{{ object.price }}</td>
+</tr>
+{% endfor %}
+</table><a class="btn btn-primary" href="{% url 'geotag_classifieds_create' %}">Create new Classifieds</a>
+{% endblock %}

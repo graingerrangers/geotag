@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'geotag_locations_list' %}">Locations Listing</a></p>
+<table class="table">
+<tr><td>location_id</td><td>{{ object.location_id }}</td></tr>
+<tr><td>popularity</td><td>{{ object.popularity }}</td></tr>
+<tr><td>coord_x</td><td>{{ object.coord_x }}</td></tr>
+<tr><td>coord_y</td><td>{{ object.coord_y }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit Locations</a>
+
+{% endblock %}

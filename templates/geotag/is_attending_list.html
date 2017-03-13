@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'geotag_is_attending_list' %}">Is_Attending Listing</a></p>
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>user_id</td>
+    <td>event_id</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.user_id }}</td>
+    <td>{{ object.event_id }}</td>
+</tr>
+{% endfor %}
+</table><a class="btn btn-primary" href="{% url 'geotag_is_attending_create' %}">Create new Is_Attending</a>
+{% endblock %}

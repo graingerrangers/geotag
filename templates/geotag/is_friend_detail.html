@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'geotag_is_friend_list' %}">Is_Friend Listing</a></p>
+<table class="table">
+<tr><td>user1_id</td><td>{{ object.user1_id }}</td></tr>
+<tr><td>user2_id</td><td>{{ object.user2_id }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit Is_Friend</a>
+
+{% endblock %}

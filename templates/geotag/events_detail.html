@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'geotag_events_list' %}">Events Listing</a></p>
+<table class="table">
+<tr><td>event_id</td><td>{{ object.event_id }}</td></tr>
+<tr><td>description</td><td>{{ object.description }}</td></tr>
+<tr><td>name</td><td>{{ object.name }}</td></tr>
+<tr><td>start_time</td><td>{{ object.start_time }}</td></tr>
+<tr><td>end_time</td><td>{{ object.end_time }}</td></tr>
+<tr><td>max_group_size</td><td>{{ object.max_group_size }}</td></tr>
+<tr><td>fee</td><td>{{ object.fee }}</td></tr>
+<tr><td>public</td><td>{{ object.public }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit Events</a>
+
+{% endblock %}
