@@ -1,6 +1,11 @@
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
 from geotag.models import Users, Reviews, Locations, Events, Is_Attending, Classifieds, Is_Friend
 from forms import UsersForm, ReviewsForm, LocationsForm, EventsForm, Is_AttendingForm, ClassifiedsForm, Is_FriendForm
+from django.shortcuts import render
+
+
+def heat_map(request):
+    return render(request, 'heatmap.html')
 
 
 class UsersListView(ListView):

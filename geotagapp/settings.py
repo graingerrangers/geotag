@@ -57,7 +57,7 @@ ROOT_URLCONF = 'geotagapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'geotag','templates', 'geotag')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
