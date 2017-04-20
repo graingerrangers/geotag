@@ -36,6 +36,7 @@ class LocationsSerializer(serializers.ModelSerializer):
             'popularity',
             'coord_x',
             'coord_y',
+            'tag',
         )
 
 

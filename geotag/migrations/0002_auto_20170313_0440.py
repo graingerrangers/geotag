@@ -59,6 +59,7 @@ class Migration(migrations.Migration):
                 ('popularity', models.FloatField()),
                 ('coord_x', models.FloatField()),
                 ('coord_y', models.FloatField()),
+                ('tag', models.CharField())
             ],
         ),
         migrations.AddField(
