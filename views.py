@@ -48,7 +48,10 @@ def bounding_map(request):
 
     return render(request, 'bounding_map.html', {'vertices': hull.vertices, 'coordinates': coord_str})
 
+def landing_page(request):
+    return render(request, 'index.html')
 
+    
 class UsersListView(ListView):
     model = Users
 
