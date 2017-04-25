@@ -12,7 +12,7 @@ def get_coordinates():
         conn = mysql.connector.connect(user='root', password='graingerrangers', host='127.0.0.1', database='geotag')
         cur = conn.cursor()
 
-        results = cur.callproc('get_coordinates', ['UNION'])
+        results = cur.callproc('get_coordinates', ['Siebel'])
 
         for res in cur.stored_results():
             return res.fetchall()
@@ -31,16 +31,17 @@ def bounding_map(request):
 
     coord_str = ""
     for i in range(len(coordinate_list)):
-        if i != len(coordinate_list) - 1:
-            coord_str += "{lat:" + str(coordinate_list[i][0]) + "," + "lng:" + str(coordinate_list[i][1]) + "},"
-        else:
-            coord_str += "{lat:" + str(coordinate_list[i][0]) + "," + "lng:" + str(coordinate_list[i][1]) + "}"
-
         coords_2D[i] = np.array(list(coordinate_list[i]))
 
     print(coords_2D)
     hull = ConvexHull(coords_2D)
-    print(hull.vertices[0])
+    print(hull.vertices)
+
+    for i in range(len(hull.vertices)):
+        if i != len(coordinate_list) - 1:
+            coord_str += "{lat:" + str(coordinate_list[hull.vertices[i]][0]) + "," + "lng:" + str(coordinate_list[hull.vertices[i]][1]) + "},"
+        else:
+            coord_str += "{lat:" + str(coordinate_list[i][0]) + "," + "lng:" + str(coordinate_list[i][1]) + "}"
 
     print(coord_str)
 
