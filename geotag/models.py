@@ -14,10 +14,12 @@ class Reviews(models.Model):
 	user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
 
 class Locations(models.Model):
-	location_id = models.IntegerField(primary_key=True)
-	popularity = models.FloatField()
-	coord_x = models.FloatField()
-	coord_y = models.FloatField()
+    location_id = models.IntegerField(primary_key=True)
+    popularity = models.FloatField()
+    coord_x = models.FloatField()
+    coord_y = models.FloatField()
+    tag = models.CharField(max_length=30, null=True)
+    assigned_tag = models.CharField(max_length=30, null=True)
 
 class Events(models.Model):
 	event_id = models.IntegerField(primary_key=True)

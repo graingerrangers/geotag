@@ -2,7 +2,7 @@
 <html>
     <head>
     {% load static %}
-    <title>Heatmap</title>
+    <title>Locations of Interest</title>
     </head>
     <style>
     #map {
@@ -16,6 +16,8 @@
     }
     </style>
     <body>
+
+        <span style="display:none">{{vertices}}</span>
         <div id="map"></div>
 
         <!-- <script src="{% static 'heatmap.js' %}"></script> -->
@@ -28,7 +30,22 @@
              mapTypeId: 'terrain'
            });
 
+         {% for coordinate in coordinates %}
+         var polygonCoords = [
+             {{coordinate}}
+         ];
 
+         var boundingPolygon = new google.maps.Polygon({
+             paths: polygonCoords,
+             strokeColor: '#FF0000',
+             strokeOpacity: 0.8,
+             strokeWeight: 2,
+             fillColor: '#FF0000',
+             fillOpacity: 0.35
+         });
+
+         boundingPolygon.setMap(map)
+         {% endfor %}
        var script = document.createElement('script');
 
       // This example uses a local copy of the GeoJSON stored at
@@ -37,19 +54,6 @@
       document.getElementsByTagName('head')[0].appendChild(script);
   }
 
-    function eqfeed_callback(results) {
-      var heatmapData = [];
-      for (var i = 0; i < results.features.length; i++) {
-        var coords = results.features[i].geometry.coordinates;
-        var latLng = new google.maps.LatLng(coords[1], coords[0]);
-        heatmapData.push(latLng);
-      }
-      var heatmap = new google.maps.visualization.HeatmapLayer({
-        data: heatmapData,
-        dissipating: false,
-        map: map
-      });
-    }
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGXOthooqr2x2_hts4YM7iKwaadmcCjoc&libraries=visualization&callback=initMap"
 async defer></script>
