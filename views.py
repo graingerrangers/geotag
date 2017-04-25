@@ -51,7 +51,7 @@ def bounding_map(request):
 def landing_page(request):
     return render(request, 'index.html')
 
-    
+
 class UsersListView(ListView):
     model = Users
 
