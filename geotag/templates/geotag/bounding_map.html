@@ -2,7 +2,7 @@
 <html>
     <head>
     {% load static %}
-    <title>Heatmap</title>
+    <title>Locations of Interest</title>
     </head>
     <style>
     #map {
@@ -30,11 +30,11 @@
              mapTypeId: 'terrain'
            });
 
+         {% for coordinate in coordinates %}
          var polygonCoords = [
-             {{coordinates}}
+             {{coordinate}}
          ];
 
-         console.log(polygonCoords)
          var boundingPolygon = new google.maps.Polygon({
              paths: polygonCoords,
              strokeColor: '#FF0000',
@@ -45,7 +45,7 @@
          });
 
          boundingPolygon.setMap(map)
-
+         {% endfor %}
        var script = document.createElement('script');
 
       // This example uses a local copy of the GeoJSON stored at

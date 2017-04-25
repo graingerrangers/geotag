@@ -6,13 +6,17 @@ import mysql.connector
 from scipy.spatial import ConvexHull
 import numpy as np
 
-def get_coordinates():
+def get_coordinates(location):
     try:
         # db_config = read_db_config()
         conn = mysql.connector.connect(user='root', password='graingerrangers', host='127.0.0.1', database='geotag')
         cur = conn.cursor()
 
-        results = cur.callproc('get_coordinates', ['Siebel'])
+
+
+
+        results = cur.callproc('get_coordinates', [location])
+
 
         for res in cur.stored_results():
             return res.fetchall()
@@ -26,27 +30,40 @@ def heat_map(request):
     return render(request, 'heatmap.html')
 
 def bounding_map(request):
-    coordinate_list = get_coordinates()
-    coords_2D = np.zeros((len(coordinate_list), 2))
 
-    coord_str = ""
-    for i in range(len(coordinate_list)):
-        coords_2D[i] = np.array(list(coordinate_list[i]))
+    conn = mysql.connector.connect(user='root', password='graingerrangers', host='127.0.0.1', database='geotag')
+    cur = conn.cursor()
 
-    print(coords_2D)
-    hull = ConvexHull(coords_2D)
-    print(hull.vertices)
+    cur.execute("""SELECT DISTINCT assigned_tag FROM geotag_locations""")
+    rows = cur.fetchall()
 
-    for i in range(len(hull.vertices)):
-        if i != len(coordinate_list) - 1:
-            coord_str += "{lat:" + str(coordinate_list[hull.vertices[i]][0]) + "," + "lng:" + str(coordinate_list[hull.vertices[i]][1]) + "},"
-        else:
-            coord_str += "{lat:" + str(coordinate_list[i][0]) + "," + "lng:" + str(coordinate_list[i][1]) + "}"
+    coord_strings = []
 
-    print(coord_str)
+    for i in range(len(rows)):
 
+        coordinate_list = get_coordinates(rows[i][0])
+        print(coordinate_list)
+        coords_2D = np.zeros((len(coordinate_list), 2))
 
-    return render(request, 'bounding_map.html', {'vertices': hull.vertices, 'coordinates': coord_str})
+        coord_str = ""
+        for j in range(len(coordinate_list)):
+            coords_2D[j] = np.array(list(coordinate_list[j]))
+
+        print(coords_2D)
+        hull = ConvexHull(coords_2D)
+            # print(hull.vertices)
+
+        for j in range(len(hull.vertices)):
+            if j != len(coordinate_list) - 1:
+                coord_str += "{lat:" + str(coordinate_list[hull.vertices[j]][0]) + "," + "lng:" + str(coordinate_list[hull.vertices[j]][1]) + "},"
+            else:
+                coord_str += "{lat:" + str(coordinate_list[hull.vertices[j]][0]) + "," + "lng:" + str(coordinate_list[hull.vertices[j]][1]) + "}"
+
+        coord_strings.append(coord_str)
+
+    print(coord_strings[1])
+
+    return render(request, 'bounding_map.html', {'vertices': hull.vertices, 'coordinates': coord_strings, 'numOfPolygons': len(rows)})
 
 def landing_page(request):
     return render(request, 'index.html')
