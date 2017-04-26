@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <p><a class="btn btn-default" href="{% url 'geotag_users_list' %}">Users Listing</a></p>
-<form method="post" action="http://ec2-52-40-7-196.us-west-2.compute.amazonaws.com:8000/geotag/users">
+<form method="post" action="http://ec2-52-40-7-196.us-west-2.compute.amazonaws.com:8000/geotag/users/">
 {% csrf_token %}
 {{form|crispy}}
 <button class="btn btn-primary" type="submit">Submit</button>
