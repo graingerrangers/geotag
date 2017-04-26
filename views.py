@@ -111,7 +111,6 @@ def landing_page(request):
 def login(request):
     try:
         existing_user = Users.objects.get(fb_id=request.POST['fb_id'])
-        print('here')
     except ObjectDoesNotExist:
         new_user = Users(fb_id=request.POST['fb_id'], name=request.POST['name'])
         new_user.save()
