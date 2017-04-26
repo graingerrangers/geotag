@@ -15,6 +15,21 @@ import os
 dotenv_path = join(dirname(__file__), '../.env')
 load_dotenv(dotenv_path)
 
+def get_heatmap_coordinates(userid):
+    try:
+        # db_config = read_db_config()
+        conn = mysql.connector.connect(user=os.environ['RDS_USERNAME'], password=os.environ['RDS_PASSWORD'], host=os.environ['RDS_HOSTNAME'], database=os.environ['RDS_DB_NAME'], port=os.environ['RDS_PORT'])
+        cur = conn.cursor()
+
+        cur.callproc('heatmap', [userid])
+
+        for res in cur.stored_results():
+            return res.fetchall()
+            break
+
+    except mysql.connector.Error as e:
+        print(e)
+
 def get_coordinates(location, clusters):
     try:
         # db_config = read_db_config()
@@ -34,7 +49,16 @@ def get_coordinates(location, clusters):
 
 
 def heat_map(request):
-    return render(request, 'heatmap.html')
+    coordinate_list = get_heatmap_coordinates('astha2')
+
+    # new google.maps.LatLng(37.782551, -122.445368),
+    result = "["
+    for c in coordinate_list:
+        result += "new google.maps.LatLng(" + str(c[0]) + ", " + str(c[1]) + "),"
+
+    result = result[:-1]
+    result += "]"
+    return render(request, 'heatmap.html', {'heatmap_coords': result})
 
 def bounding_map(request):
 
