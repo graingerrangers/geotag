@@ -12,6 +12,8 @@ from dotenv import load_dotenv
 from os.path import join, dirname
 import os
 
+from django.http import HttpResponse
+
 dotenv_path = join(dirname(__file__), '../.env')
 load_dotenv(dotenv_path)
 
@@ -126,8 +128,11 @@ def login(request):
 
 @csrf_exempt
 def attend_event(request):
-    user = Users.objects.get(fb_id=request.POST['fb_id'])
-    attending_obj = Is_Attending(request.POST['fb_id'], )
+    user = Users.objects.get(fb_id=request.session['id'])
+    print(user.name)
+    attending_obj = Is_Attending(request.session['id'], request.POST['event_id'])
+    attending_obj.save()
+    return HttpResponse('It Worked')
 
 class UsersListView(ListView):
     model = Users
@@ -185,6 +190,12 @@ class LocationsUpdateView(UpdateView):
 
 class EventsListView(ListView):
     model = Events
+    def get(self, request):
+        attending_table = Is_Attending.objects.all().filter(user_id=request.session['id'])
+        event_id_list = []
+        for i in range(len(attending_table)):
+            event_id_list.append(attending_table[i].event_id)
+        return render(request, 'events_list.html', {'object_list': self.model.objects.all(), 'user_events': event_id_list})
 
 
 class EventsCreateView(CreateView):
