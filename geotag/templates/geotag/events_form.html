@@ -6,6 +6,6 @@
 <form method="post">
 {% csrf_token %}
 {{form|crispy}}
-<a class="btn btn-default" type="submit" href="{% url 'geotag_events_list' %}">Submit</a>
+<button class="btn btn-primary" type="submit">Submit</button>
 </form>
 {% endblock %}
