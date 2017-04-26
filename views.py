@@ -1,7 +1,7 @@
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
 from geotag.models import Users, Reviews, Locations, Events, Is_Attending, Classifieds, Is_Friend
 from forms import UsersForm, ReviewsForm, LocationsForm, EventsForm, Is_AttendingForm, ClassifiedsForm, Is_FriendForm
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import mysql.connector
 from scipy.spatial import ConvexHull
 import numpy as np
@@ -21,14 +21,15 @@ def get_heatmap_coordinates(userid):
         conn = mysql.connector.connect(user=os.environ['RDS_USERNAME'], password=os.environ['RDS_PASSWORD'], host=os.environ['RDS_HOSTNAME'], database=os.environ['RDS_DB_NAME'], port=os.environ['RDS_PORT'])
         cur = conn.cursor()
 
-        cur.execute("""SELECT coord_x, coord_y FROM geotag_locations""")
-        return cur.fetchall()
+#        cur.execute("""SELECT coord_x, coord_y FROM geotag_locations""")
+#        return cur.fetchall()
 
-        # cur.callproc('heatmap', [userid])
+	# print userid
+        cur.callproc('heatmap', [userid])
 
-        # for res in cur.stored_results():
-        #     return res.fetchall()
-        #     break
+        for res in cur.stored_results():
+            return res.fetchall()
+            break
 
     except mysql.connector.Error as e:
         print(e)
@@ -42,7 +43,7 @@ def get_coordinates(location, clusters):
         cur.callproc('kmeans', [clusters])
         cur.callproc('get_coordinates', [location])
 
-        print type(cur.stored_results())
+        # print type(cur.stored_results())
         for res in cur.stored_results():
             return res.fetchall()
             break
@@ -52,9 +53,12 @@ def get_coordinates(location, clusters):
 
 
 def heat_map(request):
+    if 'id' not in request.session:
+        return redirect('/')
 
     coordinate_list = get_heatmap_coordinates(request.session['id'])
 
+    # print coordinate_list
     # new google.maps.LatLng(37.782551, -122.445368),
     result = "["
     for c in coordinate_list:
@@ -77,14 +81,14 @@ def bounding_map(request):
     for i in range(len(rows)):
 
         coordinate_list = get_coordinates(rows[i][0], 4)
-        print(coordinate_list)
+#        print(coordinate_list)
         coords_2D = np.zeros((len(coordinate_list), 2))
 
         coord_str = ""
         for j in range(len(coordinate_list)):
             coords_2D[j] = np.array(list(coordinate_list[j]))
 
-        print(coords_2D)
+#        print(coords_2D)
         hull = ConvexHull(coords_2D)
             # print(hull.vertices)
 
