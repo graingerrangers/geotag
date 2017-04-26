@@ -21,11 +21,14 @@ def get_heatmap_coordinates(userid):
         conn = mysql.connector.connect(user=os.environ['RDS_USERNAME'], password=os.environ['RDS_PASSWORD'], host=os.environ['RDS_HOSTNAME'], database=os.environ['RDS_DB_NAME'], port=os.environ['RDS_PORT'])
         cur = conn.cursor()
 
-        cur.callproc('heatmap', [userid])
+        cur.execute("""SELECT coord_x, coord_y FROM geotag_locations""")
+        return cur.fetchall()
 
-        for res in cur.stored_results():
-            return res.fetchall()
-            break
+        # cur.callproc('heatmap', [userid])
+
+        # for res in cur.stored_results():
+        #     return res.fetchall()
+        #     break
 
     except mysql.connector.Error as e:
         print(e)
@@ -37,7 +40,7 @@ def get_coordinates(location, clusters):
         cur = conn.cursor()
 
         cur.callproc('kmeans', [clusters])
-        results = cur.callproc('get_coordinates', [location])
+        cur.callproc('get_coordinates', [location])
 
         print type(cur.stored_results())
         for res in cur.stored_results():
