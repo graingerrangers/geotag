@@ -8,11 +8,17 @@ import numpy as np
 from django.views.decorators.csrf import csrf_exempt
 from  django.core.exceptions import ObjectDoesNotExist
 
+from dotenv import load_dotenv
+from os.path import join, dirname
+import os
+
+dotenv_path = join(dirname(__file__), '../.env')
+load_dotenv(dotenv_path)
 
 def get_coordinates(location, clusters):
     try:
         # db_config = read_db_config()
-        conn = mysql.connector.connect(user='root', password='graingerrangers', host='127.0.0.1', database='geotag')
+        conn = mysql.connector.connect(user=os.environ['RDS_USERNAME'], password=os.environ['RDS_PASSWORD'], host=os.environ['RDS_HOSTNAME'], database=os.environ['RDS_DB_NAME'], port=os.environ['RDS_PORT'])
         cur = conn.cursor()
 
         cur.callproc('kmeans', [clusters])
@@ -32,7 +38,7 @@ def heat_map(request):
 
 def bounding_map(request):
 
-    conn = mysql.connector.connect(user='root', password='graingerrangers', host='127.0.0.1', database='geotag')
+    conn = mysql.connector.connect(user=os.environ['RDS_USERNAME'], password=os.environ['RDS_PASSWORD'], host=os.environ['RDS_HOSTNAME'], database=os.environ['RDS_DB_NAME'], port=os.environ['RDS_PORT'])
     cur = conn.cursor()
 
     cur.execute("""SELECT DISTINCT assigned_tag FROM geotag_locations""")
