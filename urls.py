@@ -78,4 +78,5 @@ urlpatterns += (
     url(r'^$', views.landing_page),
     url(r'^login', views.login),
     url(r'^home', views.home),
+    url(r'^event_map', views.event_map)
 )

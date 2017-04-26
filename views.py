@@ -52,7 +52,8 @@ def get_coordinates(location, clusters):
 
 
 def heat_map(request):
-    coordinate_list = get_heatmap_coordinates('astha2')
+
+    coordinate_list = get_heatmap_coordinates(request.session['id'])
 
     # new google.maps.LatLng(37.782551, -122.445368),
     result = "["
@@ -114,6 +115,8 @@ def login(request):
     except ObjectDoesNotExist:
         new_user = Users(fb_id=request.POST['fb_id'], name=request.POST['name'])
         new_user.save()
+
+    request.session['id'] = request.POST['fb_id']
 
     return render(request, 'home.html')
 
