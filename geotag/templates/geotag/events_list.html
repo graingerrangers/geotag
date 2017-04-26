@@ -9,7 +9,6 @@
 <table class="table">
 <tr>
     <th>ID</th>
-    <th>event_id</th>
     <th>description</th>
     <th>name</th>
     <th>start_time</th>
@@ -17,7 +16,9 @@
     <th>max_group_size</th>
     <th>fee</th>
     <th>public</th>
-
+    <th>
+        Attend
+    </th>
 </tr>
 {% for object in object_list %}
 <tr>
@@ -29,9 +30,15 @@
     <td>{{ object.end_time }}</td>
     <td>{{ object.max_group_size }}</td>
     <td>{{ object.fee }}</td>
-    <td>{{ object.public }}</td>
     <td>
-        <button class="btn btn-succes">Attend Event</button>
+        {% if object.public %}
+            yes
+        {% else %}
+            no
+        {% endif %}
+    </td>
+    <td>
+        <button id="{{object.pk}}" class="btn btn-succes">Attend Event</button>
     </td>
 </tr>
 {% endfor %}

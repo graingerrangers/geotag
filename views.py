@@ -119,6 +119,12 @@ def login(request):
 
     return render(request, 'home.html')
 
+
+@csrf_exempt
+def attend_event(request):
+    user = Users.objects.get(fb_id=request.POST['fb_id'])
+    attending_obj = Is_Attending(request.POST['fb_id'], )
+
 class UsersListView(ListView):
     model = Users
 
