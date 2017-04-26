@@ -6,3 +6,5 @@
 *.pyc
 .env
 .idea/*
+script.py
+sql_scripting.sql
