@@ -3,9 +3,9 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <p><a class="btn btn-default" href="{% url 'geotag_locations_list' %}">Locations Listing</a></p>
-<form method="post" action="http://ec2-52-40-7-196.us-west-2.compute.amazonaws.com:8000/geotag/locations/">
+<form method="post">
 {% csrf_token %}
 {{form|crispy}}
-<button class="btn btn-primary" type="submit">Submit</button>
+<a class="btn btn-default" type="submit" href="{% url 'geotag_locations_list' %}">Submit</a>
 </form>
 {% endblock %}
