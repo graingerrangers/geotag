@@ -21,14 +21,14 @@ def get_heatmap_coordinates(userid):
         conn = mysql.connector.connect(user=os.environ['RDS_USERNAME'], password=os.environ['RDS_PASSWORD'], host=os.environ['RDS_HOSTNAME'], database=os.environ['RDS_DB_NAME'], port=os.environ['RDS_PORT'])
         cur = conn.cursor()
 
-        cur.execute("""SELECT coord_x, coord_y FROM geotag_locations""")
-        return cur.fetchall()
+        # cur.execute("""SELECT coord_x, coord_y FROM geotag_locations""")
+        # return cur.fetchall()
 
-        # cur.callproc('heatmap', [userid])
+        cur.callproc('heatmap', [userid])
 
-        # for res in cur.stored_results():
-        #     return res.fetchall()
-        #     break
+        for res in cur.stored_results():
+            return res.fetchall()
+            break
 
     except mysql.connector.Error as e:
         print(e)
@@ -52,7 +52,6 @@ def get_coordinates(location, clusters):
 
 
 def heat_map(request):
-
     coordinate_list = get_heatmap_coordinates(request.session['id'])
 
     # new google.maps.LatLng(37.782551, -122.445368),
