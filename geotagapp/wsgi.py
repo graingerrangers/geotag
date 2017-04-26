@@ -13,10 +13,12 @@ from dotenv import load_dotenv
 dotenv_path = join(dirname(__file__), '../.env')
 load_dotenv(dotenv_path)
 
-import os
+import os, sys
 
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "geotagapp.settings")
+sys.path.append('/home/ubuntu/geotag')
+sys.path.append('/home/ubuntu/geotag/geotagapp')
 
 application = get_wsgi_application()
