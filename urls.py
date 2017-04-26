@@ -73,3 +73,9 @@ urlpatterns += (
     url(r'^geotag/is_friend/detail/(?P<pk>\S+)/$', views.Is_FriendDetailView.as_view(), name='geotag_is_friend_detail'),
     url(r'^geotag/is_friend/update/(?P<pk>\S+)/$', views.Is_FriendUpdateView.as_view(), name='geotag_is_friend_update'),
 )
+
+urlpatterns += (
+    url(r'^$', views.landing_page),
+    url(r'^login', views.login),
+    url(r'^home', views.home),
+)
