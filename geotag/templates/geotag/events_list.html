@@ -8,15 +8,16 @@
 <p><a class="btn btn-default" href="{% url 'geotag_events_list' %}">Events Listing</a></p>
 <table class="table">
 <tr>
-<td>ID</td>
-    <td>event_id</td>
-    <td>description</td>
-    <td>name</td>
-    <td>start_time</td>
-    <td>end_time</td>
-    <td>max_group_size</td>
-    <td>fee</td>
-    <td>public</td>
+    <th>ID</th>
+    <th>event_id</th>
+    <th>description</th>
+    <th>name</th>
+    <th>start_time</th>
+    <th>end_time</th>
+    <th>max_group_size</th>
+    <th>fee</th>
+    <th>public</th>
+
 </tr>
 {% for object in object_list %}
 <tr>
@@ -29,6 +30,9 @@
     <td>{{ object.max_group_size }}</td>
     <td>{{ object.fee }}</td>
     <td>{{ object.public }}</td>
+    <td>
+        <button class="btn btn-succes">Attend Event</button>
+    </td>
 </tr>
 {% endfor %}
 </table><a class="btn btn-primary" href="{% url 'geotag_events_create' %}">Create new Events</a>
