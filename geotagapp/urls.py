@@ -76,6 +76,8 @@ urlpatterns += (
 
 urlpatterns += (
     url(r'^geotag/heatmap/$', views.heat_map),
-    url(r'^geotag/bounding_map/$', views.bounding_map),
-    url(r'^geotag/$', views.landing_page)
+    url(r'^bounding_map/$', views.bounding_map),
+    url(r'^$', views.landing_page),
+    url(r'^login', views.login),
+    url(r'^home', views.home),
 )

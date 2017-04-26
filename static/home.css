@@ -1,0 +1,32 @@
+.vert{
+    margin-top: 10%;
+    margin-left:20%;
+}
+
+body {
+    background-color: #fa6300;
+}
+
+.modal{
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    top: 25%;
+    width: 50%;
+    height: 75%;
+    overflow: auto;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+    background: rgba(255,255,255, 1);
+    margin-left: -25%;
+    margin-top: -150px;
+    opacity: 0.5;
+}
+
+.btn-xlarge {
+    padding: 35px 45px;
+    font-size: 22px; //change this to your desired size
+    line-height: normal;
+    -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+            border-radius: 8px;
+}

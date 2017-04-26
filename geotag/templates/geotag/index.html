@@ -31,7 +31,9 @@ T
   	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
   	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600' rel='stylesheet' type='text/css'>
 
+    <script src="/static/js/fb_login.js"></script>
 </head>
+
 <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
 <!-- Preloader section -->
@@ -77,6 +79,7 @@ T
         <li><a href="#team" class="smoothScroll">Team</a></li>
         <li><a href="heatmap">Map</a></li>
         <li><a href="events/create" class="smoothScroll">Create</a></li>
+        <li><a><fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></a></fb:login-button></li>
       </ul>
     </div>
 

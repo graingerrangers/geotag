@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% csrf_token %}
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/home.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container vert">
+    <h2>Droppr</h2>
+    <div class="modal">
+
+    </div>
+    <div class="row text-center">
+        <div class="col-md-3">
+            <a href="/geotag/events/create"><button type="button" class="btn btn-primary btn-xlarge">Create Event</button>
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-primary btn-xlarge">View Events</button>
+        </div>
+        <div class="col-md-3">
+            <a href="/bounding_map"><button type="button" class="btn btn-primary btn-xlarge">View Map</button></a>
+        </div>
+
+
+    </div>
+    <div style="padding:2%" >
+
+    </div>
+    <div class="row text-center">
+        <div class="col-md-3">
+            <button type="button" class="btn btn-primary btn-xlarge">View Heatmap</button>
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-primary btn-xlarge">View Friends</button>
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-primary btn-xlarge">Something</button>
+        </div>
+
+    </div>
+</div><br>
+
+
+
+</body>
+</html>

@@ -5,19 +5,20 @@ from django.shortcuts import render
 import mysql.connector
 from scipy.spatial import ConvexHull
 import numpy as np
+from django.views.decorators.csrf import csrf_exempt
+from  django.core.exceptions import ObjectDoesNotExist
 
-def get_coordinates(location):
+
+def get_coordinates(location, clusters):
     try:
         # db_config = read_db_config()
         conn = mysql.connector.connect(user='root', password='graingerrangers', host='127.0.0.1', database='geotag')
         cur = conn.cursor()
 
-
-
-
+        cur.callproc('kmeans', [clusters])
         results = cur.callproc('get_coordinates', [location])
 
-
+        print type(cur.stored_results())
         for res in cur.stored_results():
             return res.fetchall()
             break
@@ -41,7 +42,7 @@ def bounding_map(request):
 
     for i in range(len(rows)):
 
-        coordinate_list = get_coordinates(rows[i][0])
+        coordinate_list = get_coordinates(rows[i][0], 4)
         print(coordinate_list)
         coords_2D = np.zeros((len(coordinate_list), 2))
 
@@ -65,9 +66,23 @@ def bounding_map(request):
 
     return render(request, 'bounding_map.html', {'vertices': hull.vertices, 'coordinates': coord_strings, 'numOfPolygons': len(rows)})
 
+@csrf_exempt
+def home(request):
+    return render(request, 'home.html')
+
 def landing_page(request):
     return render(request, 'index.html')
 
+@csrf_exempt
+def login(request):
+    try:
+        existing_user = Users.objects.get(fb_id=request.POST['fb_id'])
+        print('here')
+    except ObjectDoesNotExist:
+        new_user = Users(fb_id=request.POST['fb_id'], name=request.POST['name'])
+        new_user.save()
+
+    return render(request, 'home.html')
 
 class UsersListView(ListView):
     model = Users
